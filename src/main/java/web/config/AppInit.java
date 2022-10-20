@@ -8,7 +8,9 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
   @Override
   protected Class<?>[] getRootConfigClasses() {
     logger.info("\u001B[33m root config start. \u001B[0m");
-    return null;
+    return new Class<?>[] {
+        AppConfig.class
+    };
   }
 
   // Добавление конфигурации, в которой инициализируем ViewResolver, для
