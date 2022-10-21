@@ -9,27 +9,24 @@
   <!-- Bootstrap CSS -->
   <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
   <link th:href="@{/resources/css/main.css}" rel="stylesheet">
-
   <title>USER CRUD 2-3-1 application</title>
-
-  <link href="index.css" rel="stylesheet">
 </head>
 
 <body>
 
   <nav class="navbar navbar-dark bg-mynav">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">My App</a>
+      <a class="navbar-brand" href="#">Задание 2.3.1</a>
     </div>
   </nav>
 
   <div class="container">
     <div class="d-flex bd-highlight mb-3">
       <div class="me-auto p-2 bd-highlight">
-        <h2>Users
+        <h2>Пользователи (из user)
       </div>
       <div class="p-2 bd-highlight">
-        <button type="button" class="btn btn-secondary" onclick="showUserCreateBox()">Create</button>
+        <button type="button" class="btn btn-secondary" onclick="showUserCreateBox()">Новый пользователь (user)</button>
       </div>
     </div>
 
@@ -38,27 +35,24 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Avatar</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Username</th>
-            <th scope="col">Action</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">email</th>
+            <th scope="col">Действия</th>
           </tr>
         </thead>
         <tbody id="mytable">
           <tr>
-            <th scope="row" colspan="5">Loading...</th>
+            <th scope="row" colspan="5">Загрузка данных...</th>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <script src="index.js"></script>
+  <script th:src="@{/resources/css/main.js}" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-    crossorigin="anonymous"></script>
+  <script th:src="@{/resources/css/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
 </body>
 
 </html>
