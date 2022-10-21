@@ -11,23 +11,17 @@ function loadTable() {
       for (let object of objects) {
         trHTML += "<tr>";
         trHTML += "<td>" + object["id"] + "</td>";
-        /*
-        trHTML +=
-          '<td><img width="50px" src="' +
-          object["avatar"] +
-          '" class="avatar"></td>';
-        */
         trHTML += "<td>" + object["fname"] + "</td>";
         trHTML += "<td>" + object["lname"] + "</td>";
         trHTML += "<td>" + object["username"] + "</td>";
         trHTML +=
           '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox(' +
           object["id"] +
-          ')">Edit</button>';
+          ')">Изменить</button>';
         trHTML +=
           '<button type="button" class="btn btn-outline-danger" onclick="userDelete(' +
           object["id"] +
-          ')">Del</button></td>';
+          ')">Удалить</button></td>';
         trHTML += "</tr>";
       }
       document.getElementById("mytable").innerHTML = trHTML;
@@ -41,12 +35,11 @@ loadTable();
 /* Addition JS function for user table */
 function showUserCreateBox() {
   Swal.fire({
-    title: "Create user",
+    title: "Новый пользователь (создать)",
     html:
       '<input id="id" type="hidden">' +
-      '<input id="fname" class="swal2-input" placeholder="First">' +
-      '<input id="lname" class="swal2-input" placeholder="Last">' +
-      '<input id="username" class="swal2-input" placeholder="Username">' +
+      '<input id="fname" class="swal2-input" placeholder="Имя">' +
+      '<input id="lname" class="swal2-input" placeholder="Фамилия">' +
       '<input id="email" class="swal2-input" placeholder="Email">',
     focusConfirm: false,
     preConfirm: () => {
@@ -59,7 +52,6 @@ function showUserCreateBox() {
 function userCreate() {
   const fname = document.getElementById("fname").value;
   const lname = document.getElementById("lname").value;
-  const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
 
   const xhttp = new XMLHttpRequest();
@@ -69,7 +61,6 @@ function userCreate() {
     JSON.stringify({
       fname: fname,
       lname: lname,
-      username: username,
       email: email,
       avatar: "https://www.mecallapi.com/users/cat.png",
     })
@@ -94,19 +85,16 @@ function showUserEditBox(id) {
       const user = objects["user"];
       console.log(user);
       Swal.fire({
-        title: "Edit User",
+        title: "Изменить данные пользователя",
         html:
           '<input id="id" type="hidden" value=' +
           user["id"] +
           ">" +
-          '<input id="fname" class="swal2-input" placeholder="First" value="' +
+          '<input id="fname" class="swal2-input" placeholder="Имя" value="' +
           user["fname"] +
           '">' +
-          '<input id="lname" class="swal2-input" placeholder="Last" value="' +
+          '<input id="lname" class="swal2-input" placeholder="Фамилия" value="' +
           user["lname"] +
-          '">' +
-          '<input id="username" class="swal2-input" placeholder="Username" value="' +
-          user["username"] +
           '">' +
           '<input id="email" class="swal2-input" placeholder="Email" value="' +
           user["email"] +
@@ -135,9 +123,7 @@ function userEdit() {
       id: id,
       fname: fname,
       lname: lname,
-      username: username,
       email: email,
-      avatar: "https://www.mecallapi.com/users/cat.png",
     })
   );
   xhttp.onreadystatechange = function () {
