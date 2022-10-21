@@ -16,16 +16,14 @@ public class HelloController {
 
   private static final Logger logger = LogManager.getLogger(HelloController.class);
 
-  @GetMapping(value = "/hello")
+  @GetMapping(value = "/home")
   public String printWelcome(ModelMap model) {
-    LocalTime lt = LocalTime.now();
+    LocalTime localTime = LocalTime.now();
     List<String> messages = new ArrayList<>();
-    messages.add("I'm Spring MVC application");
-    messages.add("5.3.14 version by oct'2022 ");
-    messages.add("Now time is:" + lt.toString());
+    model.addAttribute("local_time", localTime);
     model.addAttribute("messages", messages);
-    logger.info("\u001B[32m messages: {} \u001B[0m", messages);
-    return "index";
+    logger.info("\u001B[32m HelloController start \u001B[0m");
+    return "home";
   }
 
 }
