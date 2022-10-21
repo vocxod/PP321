@@ -1,7 +1,6 @@
 package web.service;
 
 import web.dao.UserDao;
-import web.model.Car;
 import web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,22 +20,15 @@ public class UserServiceImp implements UserService {
     userDao.add(user);
   }
 
-  @Transactional
-  @Override
-  public void add(User user, Car car) {
-    userDao.add(user, car);
-  }
-
   @Transactional(readOnly = true)
   @Override
   public List<User> listUsers() {
     return userDao.listUsers();
   }
 
-  @Transactional(readOnly = true)
-  @Override
-  public User getUserByCar(Car car) {
-    return userDao.getUserByCar(car);
+  public User findById(Long id) {
+    User user = userDao.findById(id);
+    return user;
   }
 
 }

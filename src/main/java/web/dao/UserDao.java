@@ -11,8 +11,8 @@ public interface UserDao {
 
   List<User> listUsers();
 
-  void add(User user, Car car);
+  User findById(Long id);
 
-  User getUserByCar(Car car);
+  void add(User user, Car car);
 
 }

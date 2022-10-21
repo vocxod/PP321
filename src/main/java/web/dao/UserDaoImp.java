@@ -2,7 +2,9 @@ package web.dao;
 
 import web.model.User;
 import web.model.Car;
-import org.hibernate.SessionFactory;
+// import org.hibernate.SessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.NonUniqueResultException;
@@ -13,49 +15,38 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
-  @Autowired
-  private SessionFactory sessionFactory;
+  /*
+   * @Autowired
+   * private SessionFactory sessionFactory;
+   */
+
+  @PersistenceContext
+  private EntityManager entityManager;
 
   @Override
   public void add(User user) {
-    sessionFactory.getCurrentSession().save(user);
+    entityManager.getTransaction().begin();
+    entityManager.persist(user);
+    entityManager.getTransaction().commit();
   }
 
   @Override
   public void add(User user, Car car) {
     user.setCar(car);
-    sessionFactory.getCurrentSession().save(user);
+    add(user);
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public List<User> listUsers() {
-    TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
-    return query.getResultList();
+    List<User> users = entityManager.createQuery("SELECT user FROM User user").getResultList();
+    return users;
   }
 
   @Override
-  public User getUserByCar(Car car) {
-    User user = null;
-    try {
-      TypedQuery<User> query = sessionFactory.getCurrentSession()
-          .createQuery(
-              "SELECT u FROM User u WHERE u.car.model = :model AND u.car.series = :series",
-              User.class);
-      query.setParameter("model", car.getModel());
-      query.setParameter("series", car.getSeries());
-      // user = query.getSingleResult();
-      List<User> users = query.getResultList();
-      if (users.size() > 0 ) {
-        user = users.get(0);
-      } else {
-        user = null;
-      }
-    } catch (NoResultException e) {
-      user = null;
-    } catch (NonUniqueResultException ee) {
-      // get only first user
-    }
+  public User findById(Long id) {
+    User user = entityManager.find(User.class, id);
+    entityManager.detach(user);
     return user;
   }
 

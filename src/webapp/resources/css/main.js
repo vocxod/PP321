@@ -1,5 +1,5 @@
-/* Start loading user data */
 /* Using /pp231/api/user invoking */
+/* send request to my api for get all users */
 function loadTable() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "/pp231/api/users");
