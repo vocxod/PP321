@@ -13,7 +13,7 @@ function loadTable() {
         trHTML += "<td>" + object["id"] + "</td>";
         trHTML += "<td>" + object["fname"] + "</td>";
         trHTML += "<td>" + object["lname"] + "</td>";
-        trHTML += "<td>" + object["username"] + "</td>";
+        trHTML += "<td>" + object["email"] + "</td>";
         trHTML +=
           '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox(' +
           object["id"] +
@@ -59,10 +59,11 @@ function userCreate() {
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(
     JSON.stringify({
+      username: "username",
       fname: fname,
       lname: lname,
       email: email,
-      avatar: "https://www.mecallapi.com/users/cat.png",
+      avatar: "avatar",
     })
   );
   xhttp.onreadystatechange = function () {
@@ -112,7 +113,6 @@ function userEdit() {
   const id = document.getElementById("id").value;
   const fname = document.getElementById("fname").value;
   const lname = document.getElementById("lname").value;
-  const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
 
   const xhttp = new XMLHttpRequest();
@@ -124,6 +124,8 @@ function userEdit() {
       fname: fname,
       lname: lname,
       email: email,
+      username: "username",
+      avatar: "avatar",
     })
   );
   xhttp.onreadystatechange = function () {

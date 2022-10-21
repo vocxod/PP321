@@ -7,7 +7,7 @@
   <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/favicon.ico}">
   <!-- Bootstrap Core CSS -->
   <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- <link href="@{/styles/cssandjs/main.css}" rel="stylesheet" /> -->
+  <link href="@{/resources/css/main.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -35,7 +35,10 @@
   </div>
   <ul>
     <li>
-      <a href="https://github.com/vocxod/PP231">github решения</a>
+      <a th:href="@{/home}" target="_blank">Открыть.</a>
+    </li>
+    <li>
+      <a href="https://github.com/vocxod/PP231" target="_blank">Перейти на GitHub задания.</a>
     </li>
   </ul>
 
