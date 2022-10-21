@@ -5,11 +5,34 @@
   <meta charset="UTF-8">
   <title>Home page</title>
   <link rel="shortcut icon" type="image/x-icon" th:href="@{/favicon.ico}">
+  <!-- Bootstrap Core CSS -->
+  <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
   <!-- <link href="@{/styles/cssandjs/main.css}" rel="stylesheet" /> -->
 </head>
 
 <body>
   <h1>Задание 2.3.1 (Создаем полное CRUD приложение)</h1>
+  <div>
+    <p>
+      Условие:
+    </p>
+    <p>
+      Перейдем к созданию рабочего web-приложения. Все ключевые моменты были рассмотрены в предыдущих задачах. Теперь
+      вам требуется их сопоставить и связать в один проект.
+      Используя наработки по mvc и hibernate соберите CRUD-приложение.
+    </p>
+    <h3>Задание:</h3>
+    <ul>
+      <li>1. Написать CRUD-приложение. Использовать Spring MVC + Hibernate.</li>
+      <li>2. Должен быть класс User с произвольными полями (id, name и т.п.).</li>
+      <li>3. В приложении должна быть страница, на которую выводятся все юзеры с возможностью добавлять, удалять и
+        изменять юзера.</li>
+      <li>4. Конфигурация Spring через JavaConfig и аннотации, по аналогии с предыдущими проектами. Без использования
+        xml. Без Spring Boot.</li>
+      <li>Внесите изменения в конфигурацию для работы с базой данных. Вместо SessionFactory должен использоваться
+        EntityManager.</li>
+    </ul>
+  </div>
   <ul>
     <li>
       <a href="https://github.com/vocxod/PP231">github решения</a>
