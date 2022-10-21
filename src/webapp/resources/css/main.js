@@ -1,7 +1,8 @@
 /* Start loading user data */
+/* Using /pp231/api/user invoking */
 function loadTable() {
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "https://www.mecallapi.com/api/users");
+  xhttp.open("GET", "/pp231/api/users");
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -11,8 +12,8 @@ function loadTable() {
       for (let object of objects) {
         trHTML += "<tr>";
         trHTML += "<td>" + object["id"] + "</td>";
-        trHTML += "<td>" + object["fname"] + "</td>";
-        trHTML += "<td>" + object["lname"] + "</td>";
+        trHTML += "<td>" + object["firstName"] + "</td>";
+        trHTML += "<td>" + object["lastName"] + "</td>";
         trHTML += "<td>" + object["email"] + "</td>";
         trHTML +=
           '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox(' +
