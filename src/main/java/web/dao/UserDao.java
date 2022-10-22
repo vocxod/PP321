@@ -1,7 +1,6 @@
 package web.dao;
 
 import web.model.User;
-import web.model.Car;
 
 import java.util.List;
 
@@ -12,7 +11,5 @@ public interface UserDao {
   List<User> listUsers();
 
   User findById(Long id);
-
-  void add(User user, Car car);
 
 }

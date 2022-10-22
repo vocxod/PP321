@@ -1,7 +1,6 @@
 package web.dao;
 
 import web.model.User;
-import web.model.Car;
 // import org.hibernate.SessionFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,25 +14,14 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
-  /*
-   * @Autowired
-   * private SessionFactory sessionFactory;
-   */
-
   @PersistenceContext
   private EntityManager entityManager;
 
   @Override
   public void add(User user) {
-    entityManager.getTransaction().begin();
+    // entityManager.getTransaction().begin();
     entityManager.persist(user);
-    entityManager.getTransaction().commit();
-  }
-
-  @Override
-  public void add(User user, Car car) {
-    user.setCar(car);
-    add(user);
+    // entityManager.getTransaction().commit();
   }
 
   @Override

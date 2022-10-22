@@ -39,8 +39,8 @@ function showUserCreateBox() {
     title: "Новый пользователь (создать)",
     html:
       '<input id="id" type="hidden">' +
-      '<input id="fname" class="swal2-input" placeholder="Имя">' +
-      '<input id="lname" class="swal2-input" placeholder="Фамилия">' +
+      '<input id="firstName" class="swal2-input" placeholder="Имя">' +
+      '<input id="lastName" class="swal2-input" placeholder="Фамилия">' +
       '<input id="email" class="swal2-input" placeholder="Email">',
     focusConfirm: false,
     preConfirm: () => {
@@ -51,24 +51,22 @@ function showUserCreateBox() {
 
 /* Create new user */
 function userCreate() {
-  const fname = document.getElementById("fname").value;
-  const lname = document.getElementById("lname").value;
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
   const email = document.getElementById("email").value;
 
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "https://www.mecallapi.com/api/users/create");
+  xhttp.open("POST", "/pp231/api/users/create");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(
     JSON.stringify({
-      username: "username",
-      fname: fname,
-      lname: lname,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
-      avatar: "avatar",
     })
   );
   xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4 && (this.status == 200 || this.status == 201)) {
       const objects = JSON.parse(this.responseText);
       Swal.fire(objects["message"]);
       loadTable();
@@ -92,11 +90,11 @@ function showUserEditBox(id) {
           '<input id="id" type="hidden" value=' +
           user["id"] +
           ">" +
-          '<input id="fname" class="swal2-input" placeholder="Имя" value="' +
-          user["fname"] +
+          '<input id="firstName" class="swal2-input" placeholder="Имя" value="' +
+          user["firstName"] +
           '">' +
-          '<input id="lname" class="swal2-input" placeholder="Фамилия" value="' +
-          user["lname"] +
+          '<input id="lastName" class="swal2-input" placeholder="Фамилия" value="' +
+          user["lastName"] +
           '">' +
           '<input id="email" class="swal2-input" placeholder="Email" value="' +
           user["email"] +
@@ -112,8 +110,8 @@ function showUserEditBox(id) {
 
 function userEdit() {
   const id = document.getElementById("id").value;
-  const fname = document.getElementById("fname").value;
-  const lname = document.getElementById("lname").value;
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
   const email = document.getElementById("email").value;
 
   const xhttp = new XMLHttpRequest();
@@ -122,8 +120,8 @@ function userEdit() {
   xhttp.send(
     JSON.stringify({
       id: id,
-      fname: fname,
-      lname: lname,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       username: "username",
       avatar: "avatar",
