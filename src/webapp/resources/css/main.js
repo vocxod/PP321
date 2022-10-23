@@ -49,6 +49,11 @@ function showUserCreateBox() {
   });
 }
 
+function versionCallback(aData, sText) {
+  console.log(aData);
+  console.log(sText);
+}
+
 /* Create new user */
 function userCreate() {
   const firstName = document.getElementById("firstName").value;
@@ -65,11 +70,47 @@ function userCreate() {
       email: email,
     })
   );
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && (this.status == 200 || this.status == 201)) {
-      const objects = JSON.parse(this.responseText);
-      Swal.fire(objects["message"]);
+  /*
+  xhttp.onload() = function() {
+    if (xhttp.status == 200) {
+      console.log("Status 200");
+      versionCallback(null, responseText);
+    } else if (xhttp.status == 201) {
+      console.log("Status 201");
       loadTable();
+    } else {
+      window.allert(xhttp.statusText);
+      console.log("Error execute request");
+    }
+  }
+  xhttp.onerror = xhttp.onlimeout = function(e) {
+    window.allert(e.type);
+  }
+*/
+  xhttp.onreadystatechange = function () {
+    console.log("on ready state change to:" + this.status);
+    if (this.readyState == 4 && (this.status == 200 || this.status == 201)) {
+      const oDate = new Date();
+      console.log(oDate.toString() + " : " + this.readyState );
+      console.log(oDate.toString() + " : " + this.status );
+      console.log(oDate.toString() + " : " + this.responseText);
+
+      // const objects = JSON.parse(this.responseText);
+      // Swal.fire(objects["message"]);
+      Swal.fire(
+        'Все сделано!',
+        'Новый пользователь создан!',
+        'success'
+      ); 
+      loadTable();
+    } else {
+      console.log("Unknow status");
+      Swal.fire({
+        icon: 'error',
+        title: 'Однако...',
+        text: 'Что-то где-то пошло не так!',
+        footer: '<a href="#возможный_линк_на_возможный_мануал_с_описанием">Что это может быть?</a>'
+      })
     }
   };
 }
@@ -123,8 +164,6 @@ function userEdit() {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      username: "username",
-      avatar: "avatar",
     })
   );
   xhttp.onreadystatechange = function () {

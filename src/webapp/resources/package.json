@@ -1,0 +1,16 @@
+{
+  "name": "pp231",
+  "version": "1.0.0",
+  "description": "PP 231 js files for solution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Serg Ryabinin",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.6.1"
+  }
+}

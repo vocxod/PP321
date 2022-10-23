@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/favicon.ico}">
-  <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/resources/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/resources/node_modules/sweetalert2/dist/sweetalert2.min.css}">
   <link th:href="@{/resources/css/main.css}" rel="stylesheet">
   <title>USER CRUD 2-3-1 application</title>
 </head>
@@ -24,6 +25,7 @@
         <h2>Пользователи (из user)
       </div>
       <div class="p-2 bd-highlight">
+        <button type="button" class="btn btn-secondary" onclick="loadTable()">Обновить</button>
         <button type="button" class="btn btn-secondary" onclick="showUserCreateBox()">Новый пользователь (user)</button>
       </div>
     </div>
@@ -49,8 +51,9 @@
   </div>
 
   <script th:src="@{/resources/css/main.js}" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-  <script th:src="@{/resources/css/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
+  <script th:src="@{/resources/node_modules/sweetalert2/dist/sweetalert2.min.js}" crossorigin="anonymous"></script>
+  <script th:src="@{/resources/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
