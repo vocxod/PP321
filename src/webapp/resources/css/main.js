@@ -4,7 +4,7 @@ function loadTable() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "/pp231/api/users");
   xhttp.send();
-  xhttp.onreadystatechange = function () {
+  xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
       var trHTML = "";
@@ -70,38 +70,19 @@ function userCreate() {
       email: email,
     })
   );
-  /*
-  xhttp.onload() = function() {
-    if (xhttp.status == 200) {
-      console.log("Status 200");
-      versionCallback(null, responseText);
-    } else if (xhttp.status == 201) {
-      console.log("Status 201");
-      loadTable();
-    } else {
-      window.allert(xhttp.statusText);
-      console.log("Error execute request");
-    }
-  }
-  xhttp.onerror = xhttp.onlimeout = function(e) {
-    window.allert(e.type);
-  }
-*/
-  xhttp.onreadystatechange = function () {
-    console.log("on ready state change to:" + this.status);
-    if (this.readyState == 4 && (this.status == 200 || this.status == 201)) {
-      const oDate = new Date();
-      console.log(oDate.toString() + " : " + this.readyState );
-      console.log(oDate.toString() + " : " + this.status );
-      console.log(oDate.toString() + " : " + this.responseText);
 
-      // const objects = JSON.parse(this.responseText);
-      // Swal.fire(objects["message"]);
+  xhttp.onreadystatechange = function() {
+    console.log("on ready state change to:" + this.status);
+    if (this.readyState == 4 && this.status == 201) {
+      oDate = new Date();
+      console.log(oDate.toString() + " : " + this.readyState);
+      console.log(oDate.toString() + " : " + this.status);
+      console.log(oDate.toString() + " : " + this.responseText);
       Swal.fire(
         'Все сделано!',
         'Новый пользователь создан!',
         'success'
-      ); 
+      );
       loadTable();
     } else {
       console.log("Unknow status");
@@ -115,15 +96,15 @@ function userCreate() {
   };
 }
 
+// show update dialog
 function showUserEditBox(id) {
   console.log(id);
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "https://www.mecallapi.com/api/users/" + id);
+  xhttp.open("GET", "/pp231/api/users/" + id);
   xhttp.send();
-  xhttp.onreadystatechange = function () {
+  xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      const objects = JSON.parse(this.responseText);
-      const user = objects["user"];
+      const user = JSON.parse(this.responseText);
       console.log(user);
       Swal.fire({
         title: "Изменить данные пользователя",
@@ -149,14 +130,14 @@ function showUserEditBox(id) {
   };
 }
 
+// update api invoke
 function userEdit() {
   const id = document.getElementById("id").value;
   const firstName = document.getElementById("firstName").value;
   const lastName = document.getElementById("lastName").value;
   const email = document.getElementById("email").value;
-
   const xhttp = new XMLHttpRequest();
-  xhttp.open("PUT", "https://www.mecallapi.com/api/users/update");
+  xhttp.open("PUT", "/pp231/api/users/update/" + id);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(
     JSON.stringify({
@@ -166,31 +147,58 @@ function userEdit() {
       email: email,
     })
   );
-  xhttp.onreadystatechange = function () {
+  xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      const objects = JSON.parse(this.responseText);
-      Swal.fire(objects["message"]);
+      console.log(this.responseText);
+      Swal.fire(
+        'Все сделано!',
+        'Данные пользователя изменены!',
+        'success'
+      );
       loadTable();
     }
   };
 }
 
 function userDelete(id) {
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("DELETE", "https://www.mecallapi.com/api/users/delete");
-  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(
-    JSON.stringify({
-      id: id,
-    })
-  );
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      const objects = JSON.parse(this.responseText);
-      Swal.fire(objects["message"]);
-      loadTable();
+  Swal.fire({
+    title: 'Вы уверены?',
+    text: "Удаленного пользователя вернуть будет нельзя!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Да, удалить!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const xhttp = new XMLHttpRequest();
+      xhttp.open("DELETE", "/pp231/api/users/delete/" + id, true);
+      xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+      xhttp.send(
+        JSON.stringify({
+          id: id,
+        })
+      );
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // const objects = JSON.parse(this.responseText);
+          console.log("Status:" + this.status);
+          // console.log("ResponseTextAfterDelete: " + this.responseText);
+          Swal.fire(
+            'Готово!',
+            'Пользователь <b>id=[' + id + ']</b> удален из БД',
+            'success'
+          )
+          loadTable();
+        } else {
+          console.log("Delete error.");
+        }
+      };
+
     }
-  };
+  })
+
 }
 
 
