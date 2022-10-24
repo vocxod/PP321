@@ -29,7 +29,7 @@ function loadTable() {
     }
   };
 }
-
+// start load users on page
 loadTable();
 
 
@@ -47,11 +47,6 @@ function showUserCreateBox() {
       userCreate();
     },
   });
-}
-
-function versionCallback(aData, sText) {
-  console.log(aData);
-  console.log(sText);
 }
 
 /* Create new user */
@@ -98,7 +93,6 @@ function userCreate() {
 
 // show update dialog
 function showUserEditBox(id) {
-  console.log(id);
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "/pp231/api/users/" + id);
   xhttp.send();
@@ -182,9 +176,7 @@ function userDelete(id) {
       );
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          // const objects = JSON.parse(this.responseText);
           console.log("Status:" + this.status);
-          // console.log("ResponseTextAfterDelete: " + this.responseText);
           Swal.fire(
             'Готово!',
             'Пользователь <b>id=[' + id + ']</b> удален из БД',
